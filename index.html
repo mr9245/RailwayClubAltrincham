@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Railway Club Altrincham | LMRCA</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f5f0e8;
+    --cream-dark: #ede6d6;
+    --rail-red: #8b1a1a;
+    --rail-red-light: #a82020;
+    --rail-gold: #c9a84c;
+    --charcoal: #1e1e1e;
+    --mid: #4a4a4a;
+    --soft: #7a7a7a;
+    --white: #ffffff;
+    --section-pad: 5rem 2rem;
+    --max: 1100px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    background: var(--cream);
+    color: var(--charcoal);
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(30,30,30,0.96);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 64px;
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--rail-gold);
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .nav-logo-icon {
+    width: 32px; height: 32px;
+    background: var(--rail-red);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.72);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--rail-gold); }
+
+  .nav-cta {
+    background: var(--rail-red) !important;
+    color: var(--white) !important;
+    padding: 0.45rem 1.2rem;
+    border-radius: 2px;
+  }
+
+  .nav-cta:hover { background: var(--rail-red-light) !important; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    width: 24px; height: 2px;
+    background: var(--rail-gold);
+    display: block;
+    transition: 0.3s;
+  }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--charcoal);
+    overflow: hidden;
+  }
+
+  .hero-slides { position: absolute; inset: 0; }
+
+  .hero-slides .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.6s ease-in-out;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-slides .slide.active { opacity: 0.35; }
+
+  .slide-1 { background-image: url('images/club-front.jpg'); background-color: #3a1c1c; }
+  .slide-2 { background-image: url('images/wedding-1.jpg'); background-color: #1c2a3a; }
+  .slide-3 { background-image: url('images/function-room.jpg'); background-color: #1c3a1e; }
+  .slide-4 { background-image: url('images/bowling-green.jpg'); background-color: #3a2d1c; }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 7rem 2rem 5rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--rail-gold);
+    margin-bottom: 1.2rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--rail-gold);
+    flex-shrink: 0;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    max-width: 680px;
+  }
+
+  .hero-title em { color: var(--rail-gold); font-style: italic; }
+
+  .hero-sub {
+    color: rgba(255,255,255,0.62);
+    font-size: 1.05rem;
+    max-width: 460px;
+    margin-bottom: 2.5rem;
+    line-height: 1.85;
+  }
+
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+
+  .btn-red { background: var(--rail-red); color: var(--white); }
+  .btn-red:hover { background: var(--rail-red-light); color: var(--white); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.38);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--rail-gold);
+    color: var(--rail-gold);
+    background: rgba(201,168,76,0.08);
+  }
+
+  /* SHARED */
+  section { scroll-margin-top: 64px; }
+
+  .inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: var(--section-pad);
+  }
+
+  .eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--rail-red);
+    margin-bottom: 0.7rem;
+    font-weight: 500;
+  }
+
+  .eyebrow-gold { color: var(--rail-gold); }
+
+  .stitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    line-height: 1.18;
+    margin-bottom: 1.2rem;
+  }
+
+  .stitle em { font-style: italic; color: var(--rail-red); }
+  .stitle-light { color: var(--white); }
+  .stitle-light em { color: var(--rail-gold); }
+
+  .rule {
+    width: 44px; height: 2px;
+    background: var(--rail-gold);
+    margin-bottom: 2rem;
+  }
+
+  .rule-red { background: var(--rail-red); }
+
+  /* PLACEHOLDER */
+  .ph {
+    background: #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.22);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    gap: 0.4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ph::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(255,255,255,0.025) 20px,
+      rgba(255,255,255,0.025) 40px
+    );
+  }
+
+  .ph-icon { font-size: 1.8rem; opacity: 0.3; position: relative; z-index: 1; }
+  .ph span { position: relative; z-index: 1; }
+  .ph .ph-hint { font-size: 0.62rem; opacity: 0.5; }
+
+  /* ABOUT */
+  #about { background: var(--white); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-img-wrap { position: relative; }
+
+  .about-ph { width: 100%; aspect-ratio: 4/3; }
+
+  .about-badge {
+    position: absolute;
+    bottom: -1.2rem; right: -1.2rem;
+    background: var(--rail-red);
+    color: var(--white);
+    padding: 1.1rem 1.4rem;
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    line-height: 1.2;
+    z-index: 1;
+  }
+
+  .about-badge strong { display: block; font-size: 2rem; }
+  .about-badge small {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+
+  .about-text p { color: var(--mid); margin-bottom: 1rem; }
+  .about-text p:last-child { margin-bottom: 0; }
+
+  /* STATS */
+  .stats-bar { background: var(--charcoal); padding: 2.5rem 2rem; }
+
+  .stats-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    color: var(--rail-gold);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* FACILITIES */
+  #facilities { background: var(--cream); }
+
+  .fac-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .fac-card {
+    background: var(--white);
+    overflow: hidden;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+
+  .fac-card:hover {
+    border-color: var(--rail-gold);
+    transform: translateY(-4px);
+  }
+
+  .fac-ph { width: 100%; height: 210px; }
+
+  .fac-body { padding: 1.5rem; }
+
+  .fac-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .fac-body p { color: var(--mid); font-size: 0.88rem; line-height: 1.65; }
+
+  /* WEDDINGS */
+  #weddings {
+    background: var(--charcoal);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .weddings-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: var(--section-pad);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .wedding-perks { list-style: none; margin: 1.5rem 0 2rem; }
+
+  .wedding-perks li {
+    color: rgba(255,255,255,0.72);
+    font-size: 0.88rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+  }
+
+  .wedding-perks li::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--rail-gold);
+    margin-top: 0.58rem;
+    flex-shrink: 0;
+  }
+
+  .wedding-imgs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+
+  .wi-main { grid-column: span 2; aspect-ratio: 16/7; }
+  .wi-small { aspect-ratio: 1; }
+
+  /* EVENTS */
+  #events { background: var(--white); }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .event-card {
+    border: 1px solid var(--cream-dark);
+    padding: 2rem;
+    transition: border-color 0.2s;
+  }
+
+  .event-card:hover { border-color: var(--rail-gold); }
+
+  .event-icon {
+    width: 48px; height: 48px;
+    background: var(--cream);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .event-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .event-card p { color: var(--mid); font-size: 0.88rem; line-height: 1.65; }
+
+  /* MEMBERSHIP */
+  #membership { background: var(--cream); }
+
+  .membership-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .mem-card {
+    background: var(--white);
+    padding: 2.2rem;
+    border-top: 4px solid var(--rail-red);
+    position: relative;
+  }
+
+  .mem-card.featured { border-top-color: var(--rail-gold); }
+
+  .mem-badge {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    background: var(--rail-gold);
+    color: var(--charcoal);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  .mem-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .mem-subtitle { font-size: 0.82rem; color: var(--soft); margin-bottom: 1.2rem; }
+
+  .mem-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3rem;
+    margin: 1.2rem 0 1.5rem;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .mem-price .amount { font-size: 2.8rem; color: var(--rail-red); line-height: 1; }
+
+  .mem-price .period {
+    font-size: 0.82rem;
+    color: var(--soft);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+
+  .mem-perks { list-style: none; margin-bottom: 2rem; }
+
+  .mem-perks li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--cream-dark);
+    font-size: 0.88rem;
+    color: var(--mid);
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+  }
+
+  .mem-perks li::before {
+    content: '✓';
+    color: var(--rail-gold);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  .mem-note {
+    background: var(--white);
+    border-left: 3px solid var(--rail-gold);
+    padding: 1.2rem 1.5rem;
+    font-size: 0.85rem;
+    color: var(--mid);
+    margin-top: 2rem;
+  }
+
+  .mem-note strong { color: var(--charcoal); }
+
+  /* TESTIMONIALS */
+  #testimonials { background: var(--rail-red); }
+
+  .test-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: var(--section-pad);
+    text-align: center;
+  }
+
+  .test-inner .eyebrow { color: rgba(255,255,255,0.55); }
+
+  .test-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+    text-align: left;
+  }
+
+  .testimonial {
+    background: rgba(255,255,255,0.1);
+    padding: 2rem;
+    border-left: 3px solid var(--rail-gold);
+  }
+
+  .testimonial blockquote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.98rem;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.72;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial cite {
+    font-style: normal;
+    font-size: 0.75rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--rail-gold);
+  }
+
+  /* CONTACT */
+  #contact { background: var(--white); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+  }
+
+  .contact-detail {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.3rem;
+    align-items: flex-start;
+  }
+
+  .cd-icon {
+    width: 38px; height: 38px;
+    background: var(--cream);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 1rem;
+  }
+
+  .cd-text { font-size: 0.88rem; color: var(--mid); line-height: 1.6; }
+  .cd-text strong { color: var(--charcoal); display: block; margin-bottom: 0.1rem; }
+  .cd-text a { color: var(--rail-red); text-decoration: none; }
+  .cd-text a:hover { text-decoration: underline; }
+
+  /* FORM */
+  .form-group { margin-bottom: 1.1rem; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    border: 1px solid var(--cream-dark);
+    background: var(--cream);
+    padding: 0.75rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.2s;
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--rail-gold); }
+
+  .form-group textarea { min-height: 120px; resize: vertical; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-status {
+    margin-top: 1rem;
+    padding: 1rem;
+    font-size: 0.88rem;
+    display: none;
+    border-radius: 2px;
+  }
+
+  .form-status.success {
+    background: #e8f5e9;
+    border: 1px solid #a5d6a7;
+    color: #2e7d32;
+    display: block;
+  }
+
+  .form-status.error {
+    background: #fdecea;
+    border: 1px solid #f5c6cb;
+    color: #c62828;
+    display: block;
+  }
+
+  /* SOCIAL */
+  .social-strip { background: #111; padding: 1.4rem 2rem; }
+
+  .social-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .social-inner p {
+    color: rgba(255,255,255,0.4);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-right: 0.5rem;
+  }
+
+  .social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 1rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 0.78rem;
+    border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .social-btn:hover { border-color: var(--rail-gold); color: var(--rail-gold); }
+
+  /* FOOTER */
+  footer {
+    background: #0e0e0e;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--rail-gold);
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--rail-gold); }
+
+  .footer-copy { color: rgba(255,255,255,0.2); font-size: 0.72rem; line-height: 1.8; }
+
+  /* RESPONSIVE */
+  @media (max-width: 820px) {
+    :root { --section-pad: 3.5rem 1.25rem; }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 64px; left: 0; right: 0;
+      background: rgba(18,18,18,0.98);
+      padding: 1.5rem 2rem;
+      gap: 1.2rem;
+    }
+
+    .nav-links.open { display: flex; }
+    .hamburger { display: flex; }
+
+    .about-grid,
+    .weddings-inner,
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+    .about-badge { right: 0.5rem; bottom: 0.5rem; }
+
+    .fac-grid,
+    .membership-grid,
+    .events-grid,
+    .test-grid { grid-template-columns: 1fr; }
+
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+
+    .form-row { grid-template-columns: 1fr; }
+
+    .wi-main { aspect-ratio: 16/8; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-icon">🚂</div>
+    Railway Club Altrincham
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#facilities">Facilities</a></li>
+    <li><a href="#weddings">Weddings</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#membership">Membership</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-slides">
+    <div class="slide slide-1 active"></div>
+    <div class="slide slide-2"></div>
+    <div class="slide slide-3"></div>
+    <div class="slide slide-4"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">LMRCA &middot; Navigation Road &middot; Altrincham</p>
+    <h1 class="hero-title">A community <em>rooted</em> in railway heritage</h1>
+    <p class="hero-sub">Since the 1950s, the Railway Club has been at the heart of Altrincham — a welcoming space for members, celebrations, and community life.</p>
+    <div class="hero-btns">
+      <a href="#membership" class="btn btn-red">Become a Member</a>
+      <a href="#contact" class="btn btn-ghost">Book a Room</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="inner">
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <!--
+          PHOTO: Replace this placeholder div with the line below once you've
+          uploaded your images to the images/ folder in GitHub:
+          <img style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" src="images/club-front.jpg" alt="The Railway Club Altrincham">
+        -->
+        <div class="ph about-ph">
+          <div class="ph-icon">📷</div>
+          <span>Club Front Photo</span>
+          <span class="ph-hint">→ images/club-front.jpg</span>
+        </div>
+        <div class="about-badge">
+          <strong>60+</strong>
+          <small>Years of<br>community</small>
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="eyebrow">Our Story</p>
+        <h2 class="stitle">Welcome to the <em>Railway Club</em></h2>
+        <div class="rule"></div>
+        <p>Welcome to the LMRCA Railway Club, Navigation Road Crossing, Altrincham. We are a social club with roots that run deep into our local community.</p>
+        <p>The Railway Club was originally a British Rail Staff Association Club for the London Midland Railway Clubs Association. Established over sixty years ago, we are very proud of our railway heritage and the warm, friendly atmosphere that has made us a cornerstone of Altrincham life.</p>
+        <p>Our Club Secretary, Dennis Whiting, has been a member for many years and has also served as Club Steward. Dennis and the whole team are always happy to welcome new faces through our doors.</p>
+        <p>Whether you're looking to join as a member, hold a private function, or simply find out more — you're in the right place.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div>
+      <span class="stat-num">60+</span>
+      <span class="stat-label">Years established</span>
+    </div>
+    <div>
+      <span class="stat-num">4</span>
+      <span class="stat-label">Rooms to hire</span>
+    </div>
+    <div>
+      <span class="stat-num">100s</span>
+      <span class="stat-label">Weddings hosted</span>
+    </div>
+    <div>
+      <span class="stat-num">1</span>
+      <span class="stat-label">Great community</span>
+    </div>
+  </div>
+</div>
+
+<!-- FACILITIES -->
+<section id="facilities">
+  <div class="inner">
+    <p class="eyebrow">Our Spaces</p>
+    <h2 class="stitle">Facilities &amp; <em>Room Hire</em></h2>
+    <div class="rule"></div>
+    <p style="color:var(--mid); max-width:540px;">We have a range of rooms to suit any occasion — from large celebrations to smaller, more intimate gatherings. All rooms are available to hire.</p>
+
+    <div class="fac-grid">
+
+      <div class="fac-card">
+        <!--
+          PHOTO: Replace this div with:
+          <img style="width:100%;height:210px;object-fit:cover;display:block;" src="images/function-room.jpg" alt="Function Room">
+        -->
+        <div class="ph fac-ph">
+          <div class="ph-icon">📷</div>
+          <span>Function Room Photo</span>
+          <span class="ph-hint">→ images/function-room.jpg</span>
+        </div>
+        <div class="fac-body">
+          <h3>Function Room</h3>
+          <p>Our largest space, perfect for weddings, parties, christenings, wakes, and corporate events. Includes a stage, full PA and lighting rig, and access to our well-equipped kitchen. Bring your own caterers and DJ — no preferred suppliers list.</p>
+        </div>
+      </div>
+
+      <div class="fac-card">
+        <!--
+          PHOTO: Replace this div with:
+          <img style="width:100%;height:210px;object-fit:cover;display:block;" src="images/games-room.jpg" alt="Games Room">
+        -->
+        <div class="ph fac-ph">
+          <div class="ph-icon">📷</div>
+          <span>Games Room Photo</span>
+          <span class="ph-hint">→ images/games-room.jpg</span>
+        </div>
+        <div class="fac-body">
+          <h3>Games Room</h3>
+          <p>Home to darts, pool, and other classic club games. A great space for casual socialising, team nights out, or a relaxed evening with friends. Available for group hire.</p>
+        </div>
+      </div>
+
+      <div class="fac-card">
+        <!--
+          PHOTO: Replace this div with:
+          <img style="width:100%;height:210px;object-fit:cover;display:block;" src="images/lounge.jpg" alt="The Lounge">
+        -->
+        <div class="ph fac-ph">
+          <div class="ph-icon">📷</div>
+          <span>The Lounge Photo</span>
+          <span class="ph-hint">→ images/lounge.jpg</span>
+        </div>
+        <div class="fac-body">
+          <h3>The Lounge</h3>
+          <p>A comfortable, welcoming bar lounge — the perfect spot to relax, catch up with friends over a drink, or enjoy one of our regular club events. Fully stocked bar with your favourite drinks always on hand.</p>
+        </div>
+      </div>
+
+      <div class="fac-card">
+        <!--
+          PHOTO: Replace this div with:
+          <img style="width:100%;height:210px;object-fit:cover;display:block;" src="images/bowling-green.jpg" alt="Bowling Green">
+        -->
+        <div class="ph fac-ph">
+          <div class="ph-icon">📷</div>
+          <span>Bowling Green Photo</span>
+          <span class="ph-hint">→ images/bowling-green.jpg</span>
+        </div>
+        <div class="fac-body">
+          <h3>Bowling Green</h3>
+          <p>Our beautiful outdoor bowling green is available to members throughout the season. Whether you're a seasoned bowler or a complete beginner, all are welcome to have a go.</p>
+        </div>
+      </div>
+
+    </div>
+    <p style="margin-top:2.5rem; text-align:center;">
+      <a href="#contact" class="btn btn-red">Enquire About Booking</a>
+    </p>
+  </div>
+</section>
+
+<!-- WEDDINGS -->
+<section id="weddings">
+  <div class="weddings-inner">
+    <div>
+      <p class="eyebrow eyebrow-gold">Weddings &amp; Celebrations</p>
+      <h2 class="stitle stitle-light">Your <em>perfect day</em>, your way</h2>
+      <div class="rule rule-red"></div>
+      <p style="color:rgba(255,255,255,0.62); margin-bottom:1rem;">The LMRCA Railway Club has played host to countless weddings since the 1950s — with delighted brides, grooms, and guests at each and every one.</p>
+      <p style="color:rgba(255,255,255,0.62);">Unlike many venues, we don't tie you to a list of preferred suppliers. When you hire our function room, you have complete freedom:</p>
+      <ul class="wedding-perks">
+        <li>Arrange your own caterers with free use of our kitchen and facilities</li>
+        <li>Decorate the room exactly as you've always imagined</li>
+        <li>Invite your own DJ and/or band, who can use our stage and lighting rig</li>
+        <li>Extended bar hours and your favourite drinks specially stocked</li>
+        <li>A small deposit secures your special day</li>
+      </ul>
+      <a href="#contact" class="btn btn-red">Check Your Date</a>
+    </div>
+    <div class="wedding-imgs">
+      <!--
+        PHOTOS: Replace each placeholder div with:
+        <img style="width:100%;height:100%;object-fit:cover;display:block;" src="images/wedding-X.jpg" alt="Wedding">
+      -->
+      <div class="ph wi-main">
+        <div class="ph-icon">📷</div>
+        <span>Main Wedding Photo</span>
+        <span class="ph-hint">→ images/wedding-1.jpg</span>
+      </div>
+      <div class="ph wi-small">
+        <div class="ph-icon">📷</div>
+        <span class="ph-hint">→ images/wedding-2.jpg</span>
+      </div>
+      <div class="ph wi-small">
+        <div class="ph-icon">📷</div>
+        <span class="ph-hint">→ images/wedding-3.jpg</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="inner">
+    <p class="eyebrow">What's On</p>
+    <h2 class="stitle">Events &amp; <em>Activities</em></h2>
+    <div class="rule"></div>
+    <p style="color:var(--mid); max-width:540px;">There's always something happening at the Railway Club. From live music to our popular golf society, we offer a full calendar of events throughout the year.</p>
+
+    <div class="events-grid">
+      <div class="event-card">
+        <div class="event-icon">🎵</div>
+        <h3>Dave Egerton Band</h3>
+        <p>Live music evenings with the Dave Egerton Band are a firm fixture in the Railway Club calendar. A fantastic night out in a great atmosphere — check our Facebook page for upcoming dates.</p>
+      </div>
+      <div class="event-card">
+        <div class="event-icon">⛳</div>
+        <h3>Golf Society</h3>
+        <p>Our Golf Society welcomes players of all abilities. Regular rounds at local courses, friendly competition, and great camaraderie. Ask at the bar for details on how to join.</p>
+      </div>
+      <div class="event-card">
+        <div class="event-icon">🎉</div>
+        <h3>Private Functions</h3>
+        <p>We host parties, christenings, wakes, birthday celebrations, and more. Whatever your requirements, we'll do our very best to help make your event a success.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section id="membership">
+  <div class="inner">
+    <p class="eyebrow">Join Us</p>
+    <h2 class="stitle">Club <em>Membership</em></h2>
+    <div class="rule"></div>
+    <p style="color:var(--mid); max-width:560px;">We'd love to have you as a member. Membership runs annually from January to January and gives you access to all the club's facilities, events, and great company.</p>
+
+    <div class="membership-grid">
+
+      <div class="mem-card">
+        <h3>Standard Membership</h3>
+        <p class="mem-subtitle">Full access for all adult members</p>
+        <div class="mem-price">
+          <span class="amount">£30</span>
+          <span class="period">per year</span>
+        </div>
+        <ul class="mem-perks">
+          <li>Access to the Lounge and bar at member prices</li>
+          <li>Use of the Bowling Green throughout the season</li>
+          <li>Access to the Games Room — darts, pool &amp; more</li>
+          <li>Priority booking for club events and live music evenings</li>
+          <li>Discounted room hire for private functions</li>
+        </ul>
+        <a href="#contact" class="btn btn-red">Enquire About Membership</a>
+      </div>
+
+      <div class="mem-card featured">
+        <div class="mem-badge">Concession Rate</div>
+        <h3>Pensioner Membership</h3>
+        <p class="mem-subtitle">Discounted rate for pensioners</p>
+        <div class="mem-price">
+          <span class="amount">£20</span>
+          <span class="period">per year</span>
+        </div>
+        <ul class="mem-perks">
+          <li>Access to the Lounge and bar at member prices</li>
+          <li>Use of the Bowling Green throughout the season</li>
+          <li>Access to the Games Room — darts, pool &amp; more</li>
+          <li>Priority booking for club events and live music evenings</li>
+          <li>Discounted room hire for private functions</li>
+        </ul>
+        <a href="#contact" class="btn btn-red">Enquire About Membership</a>
+      </div>
+
+    </div>
+
+    <div class="mem-note">
+      <strong>When does membership run?</strong> The membership year runs from January to January. New members joining part-way through the year are always welcome — just ask at the bar or get in touch and we'll be happy to help.
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="test-inner">
+    <p class="eyebrow">Kind Words</p>
+    <h2 class="stitle stitle-light">What our guests <em>say</em></h2>
+    <div class="rule" style="margin:0 auto 1rem;"></div>
+
+    <div class="test-grid">
+      <div class="testimonial">
+        <blockquote>"We had our wedding reception here and it was absolutely perfect. The staff were so helpful and flexible — we could bring in our own caterers and really make the room our own. Couldn't recommend it more highly."</blockquote>
+        <cite>— Sarah &amp; James, Wedding Reception</cite>
+      </div>
+      <div class="testimonial">
+        <blockquote>"The function room is fantastic for parties. We've held our family celebrations here for years and the team always goes above and beyond. A proper community venue with real heart."</blockquote>
+        <cite>— Local Member &amp; Family</cite>
+      </div>
+      <div class="testimonial">
+        <blockquote>"Brilliant club with a lovely atmosphere. The bowling green is a real hidden gem in Altrincham, and the live music nights are always a great evening out. Love being a member here."</blockquote>
+        <cite>— Club Member</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <p class="eyebrow">Get in Touch</p>
+    <h2 class="stitle">Contact <em>Us</em></h2>
+    <div class="rule"></div>
+
+    <div class="contact-grid">
+
+      <div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.3rem; margin-bottom:1rem;">We'd love to hear from you</h3>
+        <p style="color:var(--mid); margin-bottom:2rem; font-size:0.9rem;">Whether you'd like to book a room, ask about membership, check your wedding date, or just find out more — fill in the form and we'll get back to you as soon as possible.</p>
+
+        <div class="contact-detail">
+          <div class="cd-icon">📍</div>
+          <div class="cd-text">
+            <strong>Address</strong>
+            Navigation Road Crossing, Altrincham, Greater Manchester
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon">👤</div>
+          <div class="cd-text">
+            <strong>Club Secretary</strong>
+            Dennis Whiting
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon">📘</div>
+          <div class="cd-text">
+            <strong>Facebook</strong>
+            <a href="https://www.facebook.com/LMRCA-Railway-Club-Altrincham-548337688614645/" target="_blank" rel="noopener">LMRCA Railway Club Altrincham</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon">🐦</div>
+          <div class="cd-text">
+            <strong>Twitter / X</strong>
+            <a href="https://twitter.com/railwayclubalty" target="_blank" rel="noopener">@railwayclubalty</a>
+          </div>
+        </div>
+
+        <!--
+          PHOTO: Replace this div with:
+          <img src="images/party.jpg" alt="Event at the Railway Club" style="width:100%;margin-top:2rem;display:block;">
+        -->
+        <div class="ph" style="width:100%; height:180px; margin-top:2rem;">
+          <div class="ph-icon">📷</div>
+          <span>Event Photo</span>
+          <span class="ph-hint">→ images/party.jpg</span>
+        </div>
+      </div>
+
+      <div>
+        <!--
+          ============================================================
+          FORMSPREE: Replace YOUR_FORMSPREE_ID with your actual form ID
+          e.g. if your URL is https://formspree.io/f/abcdefgh
+          then use:  action="https://formspree.io/f/abcdefgh"
+          ============================================================
+        -->
+        <form id="enquiry-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" novalidate>
+
+          <input type="hidden" name="_subject" value="New Enquiry — Railway Club Altrincham">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="f-name">Your name *</label>
+              <input type="text" id="f-name" name="name" placeholder="e.g. Jane Smith" required>
+            </div>
+            <div class="form-group">
+              <label for="f-email">Email address *</label>
+              <input type="email" id="f-email" name="email" placeholder="jane@example.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="f-phone">Phone number (optional)</label>
+            <input type="tel" id="f-phone" name="phone" placeholder="07000 000000">
+          </div>
+
+          <div class="form-group">
+            <label for="f-reason">Reason for enquiry *</label>
+            <select id="f-reason" name="reason" required>
+              <option value="">Please select…</option>
+              <option>Room hire / private function</option>
+              <option>Wedding enquiry</option>
+              <option>Membership</option>
+              <option>Events &amp; what's on</option>
+              <option>General enquiry</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="f-date">Preferred date (if applicable)</label>
+            <input type="date" id="f-date" name="preferred_date">
+          </div>
+
+          <div class="form-group">
+            <label for="f-message">Your message *</label>
+            <textarea id="f-message" name="message" placeholder="Tell us a bit more about what you need…" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-red" id="submit-btn" style="width:100%;text-align:center;">
+            Send Enquiry
+          </button>
+
+          <div class="form-status" id="form-status"></div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL STRIP -->
+<div class="social-strip">
+  <div class="social-inner">
+    <p>Follow us</p>
+    <a class="social-btn" href="https://www.facebook.com/LMRCA-Railway-Club-Altrincham-548337688614645/" target="_blank" rel="noopener">📘 Facebook</a>
+    <a class="social-btn" href="https://twitter.com/railwayclubalty" target="_blank" rel="noopener">🐦 @railwayclubalty</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🚂 Railway Club Altrincham</div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#facilities">Facilities</a></li>
+    <li><a href="#weddings">Weddings</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#membership">Membership</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://www.railwayclubaltrincham.co.uk/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a></li>
+  </ul>
+  <p class="footer-copy">
+    LMRCA Railway Club &middot; Navigation Road Crossing &middot; Altrincham<br>
+    &copy; <span id="yr"></span> All Rights Reserved.
+  </p>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Hamburger
+  const ham = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  ham.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Hero slideshow
+  const slides = document.querySelectorAll('.hero-slides .slide');
+  let cur = 0;
+  setInterval(() => {
+    slides[cur].classList.remove('active');
+    cur = (cur + 1) % slides.length;
+    slides[cur].classList.add('active');
+  }, 4500);
+
+  // Formspree AJAX
+  const form = document.getElementById('enquiry-form');
+  const statusEl = document.getElementById('form-status');
+  const submitBtn = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    if (!form.name.value.trim() || !form.email.value.trim() || !form.reason.value || !form.message.value.trim()) {
+      statusEl.className = 'form-status error';
+      statusEl.textContent = 'Please fill in all required fields (marked with *).';
+      return;
+    }
+
+    submitBtn.textContent = 'Sending…';
+    submitBtn.disabled = true;
+    statusEl.className = 'form-status';
+    statusEl.textContent = '';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        statusEl.className = 'form-status success';
+        statusEl.textContent = '✓ Thank you! Your enquiry has been sent. We\'ll be in touch shortly.';
+        form.reset();
+      } else {
+        const data = await res.json();
+        throw new Error(data.error || 'Submission failed');
+      }
+    } catch(err) {
+      statusEl.className = 'form-status error';
+      statusEl.textContent = 'Something went wrong — please try again or find us on Facebook.';
+    }
+
+    submitBtn.textContent = 'Send Enquiry';
+    submitBtn.disabled = false;
+  });
+</script>
+</body>
+</html>
