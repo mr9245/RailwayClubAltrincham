@@ -1722,6 +1722,8 @@
     links.forEach(l => l.addEventListener('click', e => { e.preventDefault(); openModal(); }));
     closeBtn.addEventListener('click', closeModal);
     overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+    // In-page links (e.g. "get in touch" → #contact) close the modal so the target section is visible
+    overlay.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', closeModal));
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
   });
 </script>
