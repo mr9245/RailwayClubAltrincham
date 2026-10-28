@@ -682,6 +682,57 @@
   .cd-text a { color: var(--rail-red); text-decoration: none; }
   .cd-text a:hover { text-decoration: underline; }
 
+  .hours-table { border-collapse: collapse; margin-top: 0.2rem; }
+  .hours-table td { padding: 0.1rem 1.5rem 0.1rem 0; }
+  .hours-table td:last-child { padding-right: 0; }
+
+  /* SPONSORS */
+  #sponsors { background: var(--cream); padding: var(--section-pad); }
+
+  .sponsors-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .sponsor-card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 150px;
+    background: var(--white);
+    border: 1px solid var(--cream-dark);
+    padding: 1.4rem 55% 1.4rem 1.6rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s;
+  }
+
+  .sponsor-card:hover { border-color: var(--rail-gold); }
+
+  /* Sponsor image centred in the right-hand side of the card; set per card with --sponsor-bg */
+  .sponsor-card::before {
+    content: '';
+    position: absolute;
+    top: 1rem; right: 1rem; bottom: 1rem; left: 45%;
+    background: var(--sponsor-bg) center / contain no-repeat;
+  }
+
+  .sponsor-card > * { position: relative; }
+
+  .sponsor-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.1rem;
+    color: var(--charcoal);
+  }
+
+  .sponsor-card p { color: var(--mid); font-size: 0.88rem; line-height: 1.65; }
+  .sponsor-card .sponsor-link { color: var(--rail-red); font-size: 0.8rem; margin-top: 0.8rem; }
+
   /* FORM */
   .form-group { margin-bottom: 1.1rem; }
 
@@ -850,6 +901,7 @@
     .fac-grid,
     .membership-grid,
     .events-grid,
+    .sponsors-grid,
     .test-grid { grid-template-columns: 1fr; }
 
     .stats-inner { grid-template-columns: repeat(2, 1fr); }
@@ -1374,6 +1426,21 @@
                 </div>
             </div>
             <div class="contact-detail">
+                <div class="cd-icon">🕐</div>
+                <div class="cd-text">
+                    <strong>Opening Times</strong>
+                    <table class="hours-table">
+                        <tr><td>Monday</td><td>6pm &ndash; 11pm</td></tr>
+                        <tr><td>Tuesday</td><td>6pm &ndash; 11pm</td></tr>
+                        <tr><td>Wednesday</td><td>6pm &ndash; 11pm</td></tr>
+                        <tr><td>Thursday</td><td>6pm &ndash; 11pm</td></tr>
+                        <tr><td>Friday</td><td>4pm &ndash; 11pm</td></tr>
+                        <tr><td>Saturday</td><td>12pm &ndash; 11pm</td></tr>
+                        <tr><td>Sunday</td><td>12pm &ndash; 7pm</td></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="contact-detail">
                 <div class="cd-icon">👤</div>
                 <div class="cd-text">
                     <strong>Club Secretary</strong>
@@ -1450,6 +1517,28 @@
   </div><!-- end inner -->
 </section>
 
+<!-- SPONSORS -->
+<section id="sponsors">
+  <div class="inner">
+    <p class="eyebrow">With Thanks To</p>
+    <h2 class="stitle">Our <em>Sponsors</em></h2>
+    <div class="rule"></div>
+
+    <div class="sponsors-grid">
+      <a class="sponsor-card" href="https://linktr.ee/essencealtrincham" target="_blank" rel="noopener" style="--sponsor-bg:url('images/sponsor-essence.webp');">
+        <h3>Essence</h3>
+        <p>Broadheath</p>
+        <p class="sponsor-link">Visit Essence &rarr;</p>
+      </a>
+      <a class="sponsor-card" href="https://the-windowco.co.uk/" target="_blank" rel="noopener" style="--sponsor-bg:url('images/sponsor-windowco.png');">
+        <h3>The Window Co</h3>
+        <p>Sale</p>
+        <p class="sponsor-link">Visit The Window Co &rarr;</p>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- SOCIAL STRIP -->
 <div class="social-strip">
   <div class="social-inner">
@@ -1470,6 +1559,7 @@
         <li><a href="#membership">Membership</a></li>
         <li><a href="#testimonials">Testimonials</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="#sponsors">Sponsors</a></li>
         <li><a href="#" id="pp-link">Privacy Policy</a></li>
     </ul>
     <p class="footer-copy">
